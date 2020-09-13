@@ -285,15 +285,11 @@ describe("ext/string", function(){
 				content: [
 					{
 						text: "Would you like\nto suck my dick?",
-						orientation: stringx.PadSide.CENTER,
 						clamp:false
 					},
-					{
-						text: "Yes",
-						orientation: stringx.PadSide.CENTER,
-						clamp:false
-					}
+					"Yes"
 				],
+				contentOrientation: stringx.PadSide.CENTER,
 				style: stringx.BoxStyle.STARRY,
 				size: 30
 			}
@@ -305,6 +301,36 @@ describe("ext/string", function(){
 ******************************\r\n\
 *             Yes            *\r\n\
 ******************************");
+
+			// separators with headers
+			options = {
+				style: stringx.BoxStyle.CIRCULAR,
+				headerOrientation: stringx.PadSide.CENTER,
+				size:40,
+				padding:2,
+				header: "Score",
+				content: [
+					{
+						text: "Name:  Jack\nRace:  God\nClass: Vampire",
+						clamp: false
+					},
+					{
+						header: "Character Sheet",
+						headerOrientation: stringx.PadSide.CENTER,
+						text: "Str: 100      Agi: 100    Int: 100",
+						clamp: false
+					},
+				]
+			}
+
+			expect(stringx.box(options)).is.equal("\
+/---------------- Score ---------------\\\r\n\
+|  Name:  Jack                         |\r\n\
+|  Race:  God                          |\r\n\
+|  Class: Vampire                      |\r\n\
+|----------- Character Sheet ----------|\r\n\
+|  Str: 100      Agi: 100    Int: 100  |\r\n\
+\\--------------------------------------/");
 			done();
 		});
 

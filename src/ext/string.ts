@@ -93,6 +93,8 @@ export type BoxLine = {
 	text: string;
 	clamp?: boolean;
 	orientation?: PadSide;
+	header?: string;
+	headerOrientation?: PadSide;
 }
 
 export function box(options:BoxOptions): string{
@@ -117,8 +119,11 @@ export function box(options:BoxOptions): string{
 	let padding = options.padding ? " ".repeat(options.padding) : "";
 	let textSize = options.size-((1+padding.length)*2);
 	for(let line of options.content) {
-		if(lines.length > 1) lines.push(left+separator.repeat(options.size-2)+right);
 		if(typeof line === "string") line = {text: line, clamp: true, orientation: options.contentOrientation};
+		if(lines.length > 1) {
+			if(line.header) lines.push(left + pad(separator+" "+line.header+" "+separator, line.headerOrientation === undefined ? PadSide.RIGHT : line.headerOrientation, options.size-2, separator) + right);
+			else lines.push(left+separator.repeat(options.size-2)+right);
+		}
 		if(line.clamp === true || line.clamp === undefined){
 			let clamped: string[] = clamp(line.text, textSize).split("\r\n");
 			for(let subline of clamped){
