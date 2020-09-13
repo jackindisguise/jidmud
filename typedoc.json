@@ -1,0 +1,6 @@
+{
+	"inputFiles": ["./"],
+	"mode": "modules",
+	"out": "docs",
+	"readme": "README.tdoc.md"
+}
