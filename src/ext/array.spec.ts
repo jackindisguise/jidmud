@@ -11,7 +11,7 @@ describe("ext/array", function(){
 			let expectation: number = (1/keys.length);
 			for(let i=0;i<trials/2;i++) tracking[arrayx.pick(keys)]++;
 			for(let i=0;i<trials/2;i++) tracking[arrayx.pick.apply(null, keys)]++;
-			for(let key of keys) expect(tracking[key]/trials).is.within(expectation*0.9, expectation*1.1);
+			for(let key of keys) expect(tracking[key]/trials).is.within(expectation*0.89, expectation*1.11);
 			done();
 		});
 	});
