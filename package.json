@@ -1,6 +1,6 @@
 {
   "name": "jidmud",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "This is the TypeDoc README file.",
   "main": "index.js",
   "scripts": {
