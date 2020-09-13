@@ -1,2 +1,6 @@
-logs/
-node_modules/
+logs
+node_modules
+.nyc_output
+build
+coverage
+docs
