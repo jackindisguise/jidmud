@@ -1,10 +1,17 @@
 import * as color from "../color";
 
-// side parameter for pad function
+/**
+ * Unique values for determining where to apply padding to string functions.
+ */
 export enum PadSide { LEFT, RIGHT, CENTER };
 
-// box styles for menus
+/**
+ * Contains {@link BoxStyleOptions} as well as all valid box styles.
+ */
 export namespace BoxStyle {
+	/**
+	 * Specifies the visual style of a box.
+	 */
 	export type BoxStyleOptions = {
 		topLeft?: string;
 		top?: string;
@@ -19,6 +26,11 @@ export namespace BoxStyle {
 		separator?: string;
 	};
 
+	/**
+	 * `[' Title '''''''''''''''''']`<br/>
+	 * `[ The contents of the box. ]`<br/>
+	 * `[..........................]`
+	 */
 	export const COMPUTERIE: BoxStyleOptions = {
 		topLeft: "[",
 		top: "'",
@@ -31,6 +43,11 @@ export namespace BoxStyle {
 		separator: "|"
 	}
 
+	/**
+	 * `.- Title ------------------.`<br/>
+	 * `| The contents of the box. |`<br/>
+	 * `'--------------------------'`
+	 */
 	export const CLEAN: BoxStyleOptions = {
 		topLeft: ".",
 		top: "-",
@@ -41,12 +58,22 @@ export namespace BoxStyle {
 		bottomRight: "'"
 	};
 
+	/**
+	 * `-- Title -------------------`<br/>
+	 * `| The contents of the box. |`<br/>
+	 * `----------------------------`
+	 */
 	export const BOXY: BoxStyleOptions = {
 		top: "-",
 		middle: "|",
 		bottom: "-",
 	};
 
+	/**
+	 * `== Title ===================`<br/>
+	 * `= The contents of the box. =`<br/>
+	 * `============================`
+	 */
 	export const BOXY_THICK: BoxStyleOptions = {
 		top:"=",
 		middle: "=",
@@ -54,6 +81,11 @@ export namespace BoxStyle {
 		separator: "="
 	}
 
+	/**
+	 * `+- Title ------------------+`<br/>
+	 * `| The contents of the box. |`<br/>
+	 * `+--------------------------+`
+	 */
 	export const BOXY_FANCY: BoxStyleOptions = {
 		top:"-",
 		middle: "|",
@@ -61,7 +93,12 @@ export namespace BoxStyle {
 		corner: "+"
 	}
 
-	export const CIRCULAR: BoxStyleOptions = {
+	/**
+	 * `/- Title ------------------\`<br/>
+	 * `| The contents of the box. |`<br/>
+	 * `\--------------------------/`
+	 */
+	export const ROUNDED: BoxStyleOptions = {
 		topLeft: "/",
 		top: "-",
 		topRight: "\\",
@@ -71,6 +108,11 @@ export namespace BoxStyle {
 		bottomRight: "/"
 	}
 
+	/**
+	 * `** Title *******************`<br/>
+	 * `* The contents of the box. *`<br/>
+	 * `****************************`
+	 */
 	export const STARRY: BoxStyleOptions = {
 		top: "*",
 		middle: "*",
@@ -79,6 +121,9 @@ export namespace BoxStyle {
 	}
 }
 
+/**
+ * Format options for {@link box}.
+ */
 export type BoxOptions = {
 	content: (string|BoxLine)[];
 	style: BoxStyle.BoxStyleOptions;
@@ -89,6 +134,9 @@ export type BoxOptions = {
 	headerOrientation?: PadSide;
 }
 
+/**
+ * Format options for content in {@link box}.
+ */
 export type BoxLine = {
 	text: string;
 	clamp?: boolean;
@@ -97,6 +145,10 @@ export type BoxLine = {
 	headerOrientation?: PadSide;
 }
 
+/**
+ * Generate a text box around content.
+ * @param options The options used to generate the box.
+ */
 export function box(options:BoxOptions): string{
 	// preprocessing to avoid fuck tons of embedded expressions
 	let top = options.style.top ? options.style.top : "-";
@@ -143,6 +195,13 @@ export function box(options:BoxOptions): string{
 	return lines.join("\r\n");
 }
 
+/**
+ * Trims all whitespace and reformats the string based on its width,
+ * adding linebreaks as delimiters. This is basically a wordwrap
+ * function.
+ * @param str The string to clamp.
+ * @param size The clamp width of the string.
+ */
 export function clamp(str: string, size: number): string{
 	let lines: string[] = [];
 	let split = str.split(/[ \t\r\n]+/);
@@ -176,7 +235,13 @@ export function clamp(str: string, size: number): string{
 	return lines.join("\r\n");
 }
 
-// padder functions
+/**
+ * Generate a string that is padded to a fixed length.
+ * @param str The string to pad.
+ * @param side The side to add padding to.
+ * @param size The width of the generated string.
+ * @param padder The string to use as padding.
+ */
 export function pad(str: string, side: PadSide, size: number, padder?: string): string {
 	if(padder === undefined) padder = " "; // default to a space
 	let strnocolor = color.strip(str);
@@ -203,12 +268,21 @@ export function pad(str: string, side: PadSide, size: number, padder?: string): 
 	return padder.repeat(left) + str + padder.repeat(right);
 }
 
-// alias for pad(str, PadSide.CENTER, size);
+/**
+ * Alias for pad center.
+ * @param str The string to center.
+ * @param size The final length of the string.
+ * @param padder The string to use as padding.
+ */
 export function center(str: string, size: number, padder?: string): string{
 	return pad(str, PadSide.CENTER, size);
 }
 
-// keyword functions
+/**
+ * Check if words in the needle autocomplete to words in the haystack.
+ * @param needle The keywords to search for.
+ * @param haystack The keywords to search in.
+ */
 export function compareKeywords(needle: string, haystack: string){
 	let haystacks: string[] = haystack.trim().split(/\W+/);
 	let needles: string[] = needle.trim().split(/\W+/);
@@ -228,7 +302,12 @@ export function compareKeywords(needle: string, haystack: string){
 	return true;
 }
 
-// use a string as a search term for a list of items
+/**
+ * Search a list of items using a comparison function and return the match.
+ * @param needle The string to search for.
+ * @param haystack The haystack to search in.
+ * @param compareFun The function used to compare.
+ */
 export function searchList(needle: string, haystack: any[], compareFun: (needle: string, comparedTo: any) => boolean): any|undefined{
 	for(let hay of haystack) if(compareFun(needle, hay)) return hay;
 }
