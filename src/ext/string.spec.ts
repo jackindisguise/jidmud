@@ -304,7 +304,7 @@ describe("ext/string", function(){
 
 			// separators with headers
 			options = {
-				style: stringx.BoxStyle.CIRCULAR,
+				style: stringx.BoxStyle.ROUNDED,
 				headerOrientation: stringx.PadSide.CENTER,
 				size:40,
 				padding:2,
