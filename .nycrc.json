@@ -1,0 +1,10 @@
+{
+	"exclude": [
+		"setup.spec.ts",
+		"src/**/*.spec.ts"
+	],
+	"reporter": [
+		"text",
+		"html"
+	]
+}
