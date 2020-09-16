@@ -33,57 +33,50 @@ export const DamageTypeNames = new Map<DAMAGE_TYPE, string>([
 export type DamageWord = {
 	class: DAMAGE_CLASS,
 	type: DAMAGE_TYPE,
-	singular: string,
-	plural: string
+	first: string, // first person verb
+	third: string // third person verb
 }
 
 export namespace DamageWords {
 	export const PUNCH: DamageWord = {
 		class: DAMAGE_CLASS.PHYSICAL,
 		type: DAMAGE_TYPE.BASH,
-		singular: "punch",
-		plural: "punches"
+		first: "punch",
+		third: "punches"
 	}
 
 	export const KICK: DamageWord = {
 		class: DAMAGE_CLASS.PHYSICAL,
 		type: DAMAGE_TYPE.BASH,
-		singular: "kick",
-		plural: "kicks"
+		first: "kick",
+		third: "kicks"
 	}
 
 	export const BITE: DamageWord = {
 		class: DAMAGE_CLASS.PHYSICAL,
 		type: DAMAGE_TYPE.PIERCE,
-		singular: "punch",
-		plural: "punches"
+		first: "punch",
+		third: "punches"
 	}
 
 	export const STAB: DamageWord = {
 		class: DAMAGE_CLASS.PHYSICAL,
 		type: DAMAGE_TYPE.PIERCE,
-		singular: "stab",
-		plural: "stabs"
+		first: "stab",
+		third: "stabs"
 	}
 
 	export const SLASH: DamageWord = {
 		class: DAMAGE_CLASS.PHYSICAL,
 		type: DAMAGE_TYPE.SLASH,
-		singular: "slash",
-		plural: "slashes"
+		first: "slash",
+		third: "slashes"
 	}
 
 	export const CLUB: DamageWord = {
 		class: DAMAGE_CLASS.PHYSICAL,
 		type: DAMAGE_TYPE.BASH,
-		singular: "club",
-		plural: "clubs"
-	}
-
-	export const MIND_FLAY: DamageWord = {
-		class: DAMAGE_CLASS.MAGICAL,
-		type: DAMAGE_TYPE.MAGICAL,
-		singular: "mind flay",
-		plural: "mind flays"
+		first: "club",
+		third: "clubs"
 	}
 }
