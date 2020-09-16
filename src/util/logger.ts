@@ -6,7 +6,7 @@ export const logger: winston.Logger = winston.createLogger({
 			level: "silly",
 			format: winston.format.combine(
 				winston.format.timestamp(),
-				winston.format.printf(function(i) { return `[${i.timestamp}] <${i.level}> ${i.message}`; })	
+				winston.format.printf(function(i) { return `[${i.timestamp}] <${i.level}> ${i.message}`;})	
 			),
 		}),
 		new (winston.transports.File)({
@@ -14,7 +14,7 @@ export const logger: winston.Logger = winston.createLogger({
 			level: "silly",
 			format: winston.format.combine(
 				winston.format.timestamp(),
-				winston.format.printf(function(i) { return `[${i.timestamp}] <${i.level}> ${i.message}`; })	
+				winston.format.printf(function(i) { return `[${i.timestamp}] <${i.level}> ${i.message}`;})	
 			),
 		})
 	]
