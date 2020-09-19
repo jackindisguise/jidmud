@@ -145,19 +145,19 @@ describe("ext/string", function(){
 				size: 30,
 				content: [
 					{
-						text: "Would you like\nto suck my dick?",
+						text: "This is a\nsmall question box.",
 						clamp:false
 					},
-					"Yes"
+					"Yes *** No"
 				]
 			}
 
 			expect(stringx.box(options)).is.equal("\
 ******************************\r\n\
-*       Would you like       *\r\n\
-*      to suck my dick?      *\r\n\
+*          This is a         *\r\n\
+*     small question box.    *\r\n\
 ******************************\r\n\
-*             Yes            *\r\n\
+*         Yes *** No         *\r\n\
 ******************************");
 
 			// separators with headers
